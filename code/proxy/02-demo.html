@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="name"></h1>
+    <h1 id="age"></h1>
+</body>
+<script>
+let user = {
+    name:"科比",
+    age: 24,
+}
+var nameEle = document.getElementById('name');
+var ageEle = document.getElementById('age');
+
+let p = new Proxy(user,{
+    get(target,prop){
+        console.log('get',prop)
+        return Reflect.get(target, prop)
+    },
+    set(target, prop,value) {
+        console.log('set',prop)
+        let element;
+        if(prop === 'name'){
+            element = nameEle
+        }else if(prop === 'age'){
+            element = ageEle
+        }
+
+        updateText(element,value)
+        return Reflect.set(target, prop,value)
+    },
+    deleteProperty: function (target, prop) {
+        console.log('deleteProperty',prop)
+        if(prop === 'age'){
+            updateText(ageEle,'')
+        }
+
+        if (prop === 'name') {
+            updateText(nameEle, '')
+        }
+        return Reflect.deleteProperty(target, prop)
+    },
+})
+
+
+
+function updateText(ele,text){
+    ele.innerHTML = text;
+}
+
+
+// console.log(p.name)
+updateText(nameEle, p.name)
+updateText(ageEle, p.age)
+</script>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            margin: 30px;
+        }
+
+        .spin {
+            animation: ani-spin 1s linear infinite;
+        }
+
+        @keyframes ani-spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="div"></div>
+    <div>
+        <button id="btn1">addClass</button>
+        <button id="btn2">removeClass</button>
+        <button id="btn3">toggleClass</button>
+        <button id="stop">stop</button>
+    </div>
+</body>
+<script>
+    let btn1 = document.getElementById('btn1');
+    let btn2 = document.getElementById('btn2');
+    let btn3 = document.getElementById('btn3');
+    let box = document.querySelector('.box');
+    btn1.addEventListener('click', function () {
+        box.classList.add('spin')
+    })
+    btn2.addEventListener('click', function () {
+        box.classList.remove('spin')
+    })
+
+    btn3.addEventListener('click', function () {
+
+        box.classList.remove('spin')
+        box.classList.add('spin')
+        // void box.offsetWidth;
+
+    })
+
+    //     function foo(){
+    //         console.log('foo111')
+    //         return 'foo called'
+    //     }
+
+    //    let d =  void foo();
+    //    console.log(d)
+    requestAnimationFrame(() => {
+        console.log('浏览器刷新时执行此函数，重绘之前')
+    })
+
+    var deg = 0;
+    var id;
+    var div = document.getElementById("div");
+    div.addEventListener('click', function () {
+        var self = this;
+        requestAnimationFrame(function change() {
+            self.style.transform = 'rotate(' + (deg++) + 'deg)';
+            id = requestAnimationFrame(change);
+        });
+    });
+    document.getElementById('stop').onclick = function () {
+        cancelAnimationFrame(id);
+    };
+
+
+
+</script>
+
+</html>

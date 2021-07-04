@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>hello 我是Hdd1666</h1>
+	<div></div>
+</body>
+<script>
+var template = `<ul> 
+	<% for(var i=0; i < data.names.length; i++) { %> 
+ 		<li><%= data.names[i] %></li> 
+ 	<% } %>
+ </ul>`;
+function test(temp, obj){
+    //正则处理字符串
+    temp = temp.replace(/<%=(.+?)%>/g, "`) \n echo($1) \n echo(`" );
+    temp = temp.replace(/<%(.+?)%>/g, "`) \n $1 \n echo(`" );
+    temp = "echo(`"+temp+"`)";
+
+    //准备一段代码，动态生成一个函数，把刚才准备好的temp代码嵌入当中
+    var funcStr = `(function(data){
+        var strhtml = "";
+        function echo(str){
+            strhtml += str;
+        }
+        ${temp}
+        return strhtml;
+    })`;
+    
+    //使用eval执行代码，生成并返回这个函数
+    var func = eval(funcStr);
+    //调用这个函数，得到最终的字符串模板
+    var res = func(obj);
+    return res;
+}
+
+// console.log( test(template, {names:["张三","李四","tony stark","hulk"]}) );
+var temp = `<div><%= name %></div>`;
+console.log( test(temp,{name:"王大锤"}) );
+
+</script>
+</html>

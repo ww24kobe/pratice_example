@@ -1,0 +1,28 @@
+{
+  "name": "axios-get",
+  "version": "1.0.3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "axios-get": "cli.js"
+  },
+  "keywords": [
+    "ajax",
+    "promise",
+    "axios-get",
+    "test"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "commander": "^5.1.0",
+    "ora": "^4.0.4"
+  },
+  "devDependencies": {
+    "css-loader": "^3.5.3"
+  }
+}

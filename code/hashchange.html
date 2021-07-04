@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>onhashchange</h2>
+    <a href="#bd">百度</a>
+    <a href="#jd">京东</a>
+
+    <p id="bd">
+        百度百度百度百度百度百度百度
+    </p>
+    <p id="jd">
+        京东京东京东京东京东京东京东
+    </p>
+</body>
+<script>
+window.onhashchange = function(e){
+    let {oldURL,newURL} = e
+    let index = newURL.indexOf('#') + 1;
+    let url = newURL.slice(index)
+    let urlMap = {
+        bd: "baiduComponent",
+        jd: "JDComponent"
+    }
+    alert(urlMap[url] + '组件') ;
+}
+</script>
+</html>

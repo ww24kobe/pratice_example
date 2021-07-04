@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 300vh;
+        padding: 0;
+        margin: 0;
+      }
+
+      .zx {
+        position: sticky;
+        top: 0;
+        left: 0;
+        background-color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div>111</div>
+      <h2 v-if="flag">2222</h2>
+      <h2 v-show="flag">3333</h2>
+      <h2 v-show="flag" class="zx">44444</h2>
+      <h2 v-show="flag">555555</h2>
+      <h2 v-show="flag">6666666</h2>
+      <h2 class="zx" v-show="flag">777fixed-relative</h2>
+      <h2 v-show="flag">8888</h2>
+      <h2 v-show="flag">999</h2>
+      <h2 v-show="flag">101010</h2>
+      <h2 v-show="flag">8888</h2>
+      <h2 v-show="flag" class="zx">999</h2>
+      <h2 v-show="flag">101010</h2>
+      <h2 v-show="flag">8888</h2>
+      <h2 v-show="flag">999</h2>
+      <h2 v-show="flag">101010</h2>
+    </div>
+  </body>
+  <script src="./vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        flag: true,
+      },
+    });
+  </script>
+</html>

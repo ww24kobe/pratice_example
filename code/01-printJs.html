@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/print-js/dist/print.css">
+    <style>
+        .title {
+            box-shadow: 0 0 20px pink;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h1 style="text-align: center;">标题</h1>
+        <h1 style="color:red">111</h1>
+        <h2 class="title">222</h2>
+        <h3>333</h3>
+        <span>11</span>
+        <a href="http://baidu.com">百度</a>
+        <img  width="200px" src="https://t7.baidu.com/it/u=1297102096,3476971300&fm=193&f=GIF" alt="">
+    </div>
+    <button id="btn">download</button>
+</body>
+<script src="./node_modules/print-js/dist/print.js"></script>
+<script>
+    document.getElementById('btn').onclick = function(){
+        console.log('11')
+        printJS(
+            {   printable: 'box', 
+                type: 'html', 
+                header: 'PrintJS - Form Element Selection',
+                properties: ['name', 'email', 'phone'],
+                gridHeaderStyle: 'color: red;  border: 2px solid #3971A5;',
+                gridStyle: 'border: 2px solid #3971A5;'
+            }
+        )
+    }
+</script>
+</html>

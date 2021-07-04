@@ -1,0 +1,20 @@
+{
+  "name": "porket-ajax",
+  "version": "1.0.3",
+  "description": "这是一个基于promise封装的ajax请求库，仅仅用于浏览器端",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "ajax",
+    "pronmise",
+    "http",
+    "request"
+  ],
+  "author": "wangwei",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.4.0"
+  }
+}

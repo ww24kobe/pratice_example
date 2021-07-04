@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .box .text {
+            font-size: 50px;
+            color: red;
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <span class="text"></span>
+        <canvas id="canvas"></canvas>
+    </div>
+    <div>
+        <img src="" id="img" alt="">
+    </div>
+</body>
+<script>
+    let arr = ['200元', '300元', '400元', '500元', '600元', '谢谢', '谢谢', '谢谢', '谢谢', '谢谢', '谢谢', '谢谢', '谢谢', '谢谢', '谢谢', '谢谢'];
+    let canvas;
+    let imgEle = document.getElementById('img');
+    (function init() {
+        canvas = document.getElementById('canvas');
+        canvas.width = 200;
+        canvas.height = 100;
+        let ctx = canvas.getContext("2d")
+        // 设置随机值
+        setResult();
+        // 设置canvas遮盖
+        drawMask(ctx)
+        
+        // 移动划开遮盖
+        drawStroke(ctx);
+    })();
+    function setResult() {
+        let max = arr.length - 1;
+        let randomInx = randomNum(0, max);
+        let text = document.getElementsByClassName('text')[0];
+        text.innerText = arr[randomInx];
+    }
+
+    function randomNum(min, max) {
+        return parseInt(Math.random() * (max - min + 1) + min);
+    }
+
+    function drawMask(ctx) {
+        ctx.save()
+        ctx.fillStyle = "rgb(166,166,166)";
+        ctx.fillRect(0, 0, 200, 100);
+        ctx.restore();
+    }
+
+    function drawStroke(ctx) {
+        canvas.onmousedown = function (e) {
+            let downX = e.offsetX;
+            let downY = e.offsetY;
+
+            ctx.beginPath();
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.lineWidth = 8;
+
+            ctx.moveTo(downX, downY);
+
+            canvas.onmousemove = function (e) {
+                ctx.lineTo(e.offsetX, e.offsetY)
+                ctx.stroke();
+            }
+
+            canvas.onmouseup = function (e) {
+                canvas.onmousemove = null; // 释放
+                // canvas convert to base64
+                let base64 = canvas.toDataURL()
+                imgEle.src = base64;
+                imgEle.onload = function (e) {
+                    console.log('加载成功')
+                }
+
+                imgEle.onerror = function (e) {
+                    console.log('加载失败')
+                }
+            }
+        }
+
+
+    }
+
+
+   
+</script>
+</html>

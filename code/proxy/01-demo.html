@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+let user = {
+    name:"科比",
+    age: 24,
+    info:{
+        a:1,
+        b:2,
+        c:{d:3}
+    }
+}
+let p = new Proxy(user,{
+    get(target,prop){
+        console.log('get',prop)
+        // return user[prop];
+        return Reflect.get(target, 'b')
+    },
+    set(target, prop,value) {
+        console.log('set',prop)
+        // target[prop] = value;
+        return Reflect.set(target, prop,value)
+    },
+    deleteProperty: function (target, prop) {
+        console.log('deleteProperty',)
+        // if (sKey in target) { return false; }
+        // return delete target[prop]
+        Reflect.deleteProperty(target, prop)
+    },
+})
+
+console.log(p.age)
+p.age = 25;
+console.log(p.age)
+p.email = 'ee@qq.com'
+
+
+delete p.name;
+
+console.log(p.name)
+console.log(p)
+</script>
+</html>

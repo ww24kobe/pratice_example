@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <h2>canvas</h2> -->
+    <canvas id="myCanvas"></canvas>
+</body>
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext('2d');
+    // 开始一个新的路径
+    ctx.beginPath();
+    ctx.moveTo(20, 30);
+    ctx.lineTo(180, 80);
+    ctx.lineTo(100, 120);
+    
+    // 线宽度，默认1px
+    ctx.lineWidth = 8
+    // 闭合路径
+    ctx.closePath();
+    // 描边（相当于边框）
+    ctx.stroke();
+</script>
+</html>

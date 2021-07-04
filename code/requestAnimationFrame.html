@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 0px;
+            height: 20px;
+            line-height: 20px;
+            background-color: #23acad;
+        }
+    </style>
+</head>
+<body>
+    <!-- 动画进度条 -->
+    <div id="box" class="box">
+        0%
+    </div>
+    <button id="btn">run</button>
+</body>
+<script>
+    let timer;
+    let btn = document.getElementById('btn');
+    let box = document.getElementById('box')
+    btn.onclick = function(){
+        box.style.width = '0';
+        cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function fn(){
+            if(parseInt(box.style.width)<500){
+                box.style.width = parseInt(box.style.width) + 5 + 'px'
+                box.innerHTML = parseInt(box.style.width) / 5 + '%'
+                timer = requestAnimationFrame(fn)
+            }else{
+                cancelAnimationFrame(timer)
+            }
+        })
+    }
+</script>
+</html>

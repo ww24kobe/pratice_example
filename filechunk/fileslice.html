@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="file" name="" id="file">
+    </div>
+    <div>
+        <button id="btn">upload</button>
+    </div>
+
+</body>
+<!-- 使用md5的加密方式对字符串进行hash加密 -->
+<script src="https://cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.js"></script>
+<script>
+    document.getElementById('btn').onclick = async function () {
+        var file = document.getElementById('file').files;
+        if (!file.length) {
+            alert('please upload file');
+            return;
+        }
+        file = file[0];
+        var chunkSize = 20000;
+        var chunks = []
+        var blob1 = file.slice(0, chunkSize)
+        var blob2 = file.slice(chunkSize, chunkSize * 2)
+        var blob3 = file.slice(chunkSize * 2)
+        chunks.push(blob1, blob2, blob3)
+        await sleep(1000)
+        let base64 = await convertBase64(file);
+        
+        
+        console.log(base64)
+        var filename = md5(file.name) + (new Date()).getTime() + '.png'
+        console.log(filename)
+
+    }
+
+    // 将文件转化为base64
+    function convertBase64(file) {
+        return new Promise(resolve => {
+            let fileRead = new FileReader()
+            fileRead.readAsDataURL(file)
+            fileRead.onload = (e) => {
+                console.log(e.target.result)
+                resolve(e.target.result)
+
+            }
+        })
+    }
+
+    // 延迟执行
+    function sleep(ms){
+        return new Promise((resolve) => setTimeout(resolve,ms)) 
+    }
+</script>
+
+</html>

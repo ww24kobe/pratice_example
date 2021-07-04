@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border:1px solid  rgb(121 223 204);
+            border-left-color: transparent;
+            margin: 100px auto;
+            /*margin-left: 100px;*/
+            /*transition: all 1s 0s ease-in;*/
+            /* reverse动画反着来 */
+            animation: 2s 0.1s rainbow linear infinite;
+            /* animation-play-state: paused; */
+            
+        }
+
+        .box .small {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            border-left-color: transparent;
+            animation: 2s 0.4s rainbow linear infinite;
+
+        }
+
+        .box .small .son {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 1px solid green;
+            border-left-color: transparent;
+            animation: 2s 0.7s rainbow linear infinite;
+
+        }
+
+        
+
+        @keyframes rainbow {
+            /* 动画共2s时间 */
+            /* 花费80%时间运动到80% */
+            /* 花费20%时间会回到原状态 */
+            /* 0%和100%的都是初始状态，可以省略不写。会自动推算中间状态 */
+            /* 如果省略某个状态，浏览器会自动推算中间状态 */
+
+            /*如：花费50%时间执行效果，和回到初始状态，保证开始和结束状态花费时间一样*/
+            /* 下面的0%和100%写不写都一样，因为都是设置起始样式，animation会自动计算 */
+           /* 0%  { 
+                transform: scale(1); 
+               
+            }*/
+            0%  { 
+                /*transform: scale(1.3); */
+                transform: rotate(0deg);
+                /*opacity: 0.5;*/
+                /*background-color: #e9e9e9;*/
+                /*margin-top: 200px;*/
+            }
+            
+            100%  { 
+                transform: rotate(360deg);
+                /*transform: scale(1); 
+                background-color: rgb(102, 69, 39);*/
+            }
+
+
+        }
+
+        .box:hover {
+            /*width: 120px;*/
+            /*height: 120px;*/
+            opacity: 0.5;
+            /* animation-play-state:running */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="small">
+            <div class="son"></div>
+        </div>
+    </div>
+</body>
+</html>

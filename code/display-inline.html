@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            background-color: pink;
+            margin: 20px 0;
+        }
+
+        .inline-block {
+            display: inline-block;
+        }
+
+
+        .inline {
+            display: inline;
+            background-color: green;
+            border: 2px solid #ccc;
+        }
+
+        .span3 {
+            display: block;
+            width: 100%;
+            background-color: rgb(231, 186, 186);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="block">block1</div>
+    <div class="block">block2</div>
+    <div class="block">block3</div>
+
+    <div class="inline-block">inline-block1</div>
+    <div class="inline-block">inline-block2</div>
+    <div class="inline-block">inline-block3</div>
+    <div class="inline-block">inline-block4</div>
+
+    <div class="inline">inline1</div>
+    <div class="inline">inline2</div>
+    <div class="inline">inline3-<span class="span3">span3span3span3</span></div>
+    <div class="inline">inline4-<span class="span3">span4</span></div>
+
+
+    <span>
+        1111<br/>2222
+    </span>
+</body>
+
+</html>

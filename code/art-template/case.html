@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./art-template-web.js"></script>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+
+<script id="tpl-user" type="text/html">
+      <h2><%= user.name %></h2>
+      <h1><%= user.age %></h1>
+
+        <ul>
+            <% for(var i = 0; i < hobby.length; i++){ %>
+                <li> <%= i %> <%= hobby[i] %> </li>
+            <% } %>
+        </ul>
+</script>
+
+<script>
+    // 基于模板名渲染模板
+  var result = template('tpl-user', {
+       user:{
+           name:"大锤我爱你",
+           age:"18"
+       },
+       hobby:['写代码','吃鸡','LOL']
+   }) ;
+
+   document.getElementById('box').innerHTML = result;
+</script>
+
+</html>

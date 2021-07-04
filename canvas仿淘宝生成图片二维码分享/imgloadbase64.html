@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="./qrcode.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <title>Document</title>
+    <style>
+        .canbox {
+            border: 1px solid #ccc;
+            padding: 5px;
+            width: 520px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="qrcode"></div>
+    <h2>canvas画布：</h2>
+    <div class="canbox">
+        <canvas id="container" width="520" height="480"></canvas>
+    </div>
+</body>
+<script>
+    let imgBig = new Image()
+    imgBig.setAttribute('crossOrigin', 'anonymous')
+    imgBig.src = 'http://test.w0824.com/banner_1.jpg'
+
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width: 100,
+        height: 100
+    });
+
+    function makeCode(qrcode,content) {
+        qrcode.makeCode(content);
+    }
+
+    imgBig.onload = (e) => {
+        makeCode(qrcode,'http://blog.w0824.com/'); // 生成二维码内容
+        var qrcodeEle = $("#qrcode > img")[0];
+        qrcodeEle.onload = () => {
+            let smallBig = new Image()
+            smallBig.setAttribute('crossOrigin', 'anonymous')
+            smallBig.src = qrcodeEle.src
+            getBase64Image(imgBig, smallBig, imgBig.width, imgBig.height); // 最终生成的base64图片
+        }
+    }
+
+    // canvas生成图片的base64 DataURL
+    function getBase64Image(img, smallBig, w, h) {
+        var canvas = document.getElementById('container');
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, w, h);
+        // 设置字体
+        ctx.font = "18px bold 黑体";
+        // 设置颜色
+        ctx.fillStyle = "black";
+        // 设置水平对齐方式
+        ctx.textAlign = "right";
+        // 设置垂直对齐方式
+        ctx.textBaseline = "middle";
+        // 绘制文字（参数：要写的字，x坐标，y坐标）
+        ctx.fillText("要写的文字1", 300, 400);
+        ctx.fillText("要写的文字2", 300, 430);
+        // console.log(smallBig);
+        ctx.drawImage(smallBig, 320, 300, 150, 150);
+        return canvas.toDataURL();
+    }
+</script>
+<!-- https://www.npmjs.com/package/qrcode -->
+</html>

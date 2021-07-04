@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>正则提取标签内容</h2>
+</body>
+<script>
+  var htmlStr = `
+        <div class="item"> 
+          <img src="https://www.baidu.com/img/flexible/logo/pc/result1.png" /> 
+          <div class="price">99.76</div>
+          <div class="text">我是标题1</div>
+        </div>
+        <div class="item"> 
+          <img src="https://www.baidu.com/img/flexible/logo/pc/result2.png" /> 
+          <div class="price">919</div>
+          <div class="text">我是标题2</div>
+        </div>
+        <div class="item"> 
+          <img src="https://www.baidu.com/img/flexible/logo/pc/resul32.png" /> 
+          <div class="price">399</div>
+          <div class="text">我是标题3</div>
+        </div>
+  `;
+
+  var reg = /<img\s+src=\s?(?:\"|\')(.*)(?:\"|\')\s+\/>(?:\s?)+.*price">(.*)<\/.*>\s+.*text">(.*)<\/.*>/gi
+
+  var result = [];
+  // es5:
+  // while (r = reg.exec(htmlStr)) {
+  //     var item = {
+  //         url: r[1],
+  //         price: r[2],
+  //         title: r[3],
+  //     }
+  //     result.push(item)
+  // }
+  // console.log(result);
+
+
+  // es6:
+
+  // for(let item of htmlStr.matchAll(reg) ){
+  //   console.log(item)
+  // }
+
+  let arr = [...htmlStr.matchAll(reg)];
+  arr.forEach(item => {
+    let [content, url, price, title] = item
+    result.push({ content, url, price, title })
+  });
+  console.log(result);
+
+</script>
+
+</html>

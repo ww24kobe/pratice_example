@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>defineproperty</h2>
+</body>
+<script>
+var obj = {
+    b: 2,
+    c: 3,
+    o: 4,
+    arr: [5,6,7,8]
+};
+
+Object.defineProperty(obj,'arr',{
+    configurable: false,
+    enumerable: true,
+    get(){
+        console.log('get')
+        return 44;
+    },
+    set(){
+        console.log('set')
+        return 'set'
+    }
+})
+
+
+obj.arr[0] = 4;
+obj.arr[1] = 5;
+obj.arr[2] = 4;
+obj.arr[3] = 5;
+console.log(obj.arr);
+</script>
+</html>
