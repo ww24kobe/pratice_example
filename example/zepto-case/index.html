@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            height: 40px;
+            line-height: 40px;
+            width: 200px;
+            margin: 5px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>zepto</h1>
+    <div class="box">content</div>
+    <div class="delete">delete element</div>
+    <ul id=items>
+        <li>List item 1 <span class=delete>DELETE</span></li>
+        <li>List item 2 <span class=delete>DELETE</span></li>
+    </ul>
+    <button id="btn">button</button>
+    <button id="request">request</button>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/zepto/1.2.0/zepto.js"></script>
+<script src="./touch.js"></script>
+<script>
+    $("#btn").on('click',function(){
+        $(".box").html('八戒').css('color','red')
+    })
+
+    $("#request").on('click', function () {
+        $.ajax({
+            type: 'get',
+            dataType: "json",
+            url: "https://api.w0824.com/api/getlunbo",
+            success: function(res){
+                console.log(res)
+            }
+        })
+    })
+
+    $('#items li').swipeDown(function () {
+        console.log('swipeDown')
+        // $('.delete').hide()
+        // $('.delete', this).show()
+    })
+
+    $('.delete').tap(function () {
+        console.log('tap')
+            // $(this).parent('li').remove()
+    })
+    $('.delete').singleTap(function () {
+            console.log('singleTap')
+            // $(this).parent('li').remove()
+        })
+</script>
+<!-- https://zeptojs.bootcss.com/ -->
+<!-- 
+    大家都知道，因为历史原因，移动端上的点击事件会有 300ms 左右的延迟，Zepto 的 touch 模块解决的就是移动端点击延迟的问题，同时也提供了滑动的 swipe 事件。
+    swipe: 滑动事件
+    swipeLeft: 向左滑动事件
+    swipeRight: 向右滑动事件
+    swipeUp: 向上滑动事件
+    swipeDown: 向下滑动事件
+    doubleTap: 屏幕双击事件
+    tap: 屏幕点击事件，比 click 事件响应更快。都绑定，tap快于singleTap
+    singleTap: 屏幕单击事件
+    longTap: 长按事件
+ -->
+</html>
