@@ -8,7 +8,7 @@ const ora = require('ora');
 const { getInfo } = require("./src/api/getData.js");
 program
     .version('1.0.0')
-    .option('-t, --test [test] ', '请求地址，默认: https://w0824.com/api/info.json')
+    .option('-t, --test [test] ', '请求地址，默认: https://api.w0824.com/api/getlunbo')
     .parse(process.argv);
 
 if (program.yourname) {
@@ -17,7 +17,7 @@ if (program.yourname) {
 
 if (program.test) {
     
-    program.test = program.test === true ? "https://w0824.com/api/info.json" : program.test
+    program.test = program.test === true ? "https://api.w0824.com/api/getlunbo" : program.test
     let spinner = ora(`请求中: ${program.test}`).start();
     // console.log(`request for ${program.test}`);
     getInfo(program.test).then(res => {
