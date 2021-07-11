@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            padding: 20px;
+            margin: 30px;
+            width: 150px;
+            box-shadow: 0 0 20px pink;
+        }
+
+        .small {
+            width: 50px;
+            height: 50px;
+            background-color: skyblue;
+            position: absolute;
+        }
+
+        .small2 {
+            width: 50px;
+            height: 50px;
+            top:200px;
+            background-color: pink;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box" style="height:200px;background: red;">
+        123
+        <div class="small" id="small"></div>
+        <div class="small2" id="small2"></div>
+    </div>
+    <button id="btn">btn</button>
+    <button id="show">show</button>
+    <button id="hide">hide</button>
+</body>
+<script src="./jquery.js"></script>
+<script>
+    $("#btn").click(function () {
+        $("#box").toggle(800);
+    })
+
+    $("#show").click(function () {
+        // $("#box")[0].style.display = ''
+        $("#small2")[0].style.display = ''
+    })
+
+    $("#hide").click(function () {
+        // $("#box")[0].style.display = 'none'
+        $("#small2")[0].style.display = 'none'
+    })
+    // 动画类瞬间性的，添加后移除。
+    // 定时器
+</script>
+
+</html>
