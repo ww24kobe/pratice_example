@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./tailwind.css">
+    <style>
+        /* * {
+            padding: 0;
+            margin: 0;
+        } */
+        .box {
+            width: 400px;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+
+        .item {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            margin: 10px;
+            
+        }
+
+        .box2 {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            border: 1px solid #ccc;
+        }
+
+        p {
+  white-space: pre;
+}
+
+.custom {
+  -moz-tab-size: 3;
+  tab-size: 3;
+}
+p {
+    font-size: 1.3rem;
+}
+
+abbr {
+    font-style: italic;
+    font-weight: 100;
+}
+
+button {
+    width: 100px;
+    /* height: 40px; */
+    background-color: pink;
+    font-size: 100%;
+    border: 0px;
+    padding: 0px;
+}
+    </style>
+</head>
+<body>
+    <div class="animate-ping">111</div>
+    <div>
+        用户名: <input type="text" value='111'>
+    </div>
+    <div>
+        <sub>2<sup>3</sup></sub>
+        
+    </div>
+    <p style="text-transform: uppercase;">Regular text. <samp>This is sample text.</samp> Regular text.</p>
+    <p>Type the following in the Run dialog: <kbd>cmd</kbd><br />Then click the OK button.</p>
+    
+    <p>Save the document by pressing <kbd>Ctrl</kbd> + <kbd>S</kbd></p>
+    <pre>
+      L          TE
+        A       A
+          C    V
+           R A
+           DOU
+           LOU
+          REUSE
+          QUE TU
+          PORTES
+        ET QUI T'
+        ORNE O CI
+         VILISÉ
+        OTE-  TU VEUX
+         LA    BIEN
+        SI      RESPI
+                RER       - Apollinaire
+    </pre>
+    <p>Regular text. <code>This is code.</code> Regular text.</p>
+    <div class="box  flex flex-row items-center justify-evenly">
+        <div class="item pl-3.5 text-sm">你<sub>2<sup>3</sup></sub>好</div>
+        <div class="item animate-spin text-center">2</div>
+        <div class="item">3</div>
+    </div>
+    <div class="box2 hr">
+        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Ftransform%2F20140619%2Fanfzhnw1546754.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629181787&t=5827f667a42365d450c5e856bfb00868"
+            alt="">
+        八戒
+    </div>
+    <p>no tab</p>
+    <p>&#0009;default tab size of 8 spaces</p>
+    <p class="custom">&#0009;custom tab size of 3 spaces</p>
+    <p>&nbsp;&nbsp;&nbsp;3 spaces, equivalent to the custom tab size</p>
+    <hr>
+    <div>
+        1111
+        <abbr>222</abbr>
+
+        <p>You can use <abbr title="Cascading Style Sheets">CSS</abbr> to style your <abbr
+                title="HyperText Markup Language">HTML</abbr>.</p>
+    </div>
+
+    <div style="text-decoration: line-through double pink;">1111</div>
+    <button >登录</button>
+    <div class="bg-red-400 ">1111你好</div>
+</body>
+</html>
