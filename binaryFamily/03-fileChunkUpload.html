@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id='f' />  <br />
+    <img src="" id="preview" style="width: 100px;">
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/spark-md5/3.0.0/spark-md5.js"></script>
+<script>
+    function upload(blob,filename) {
+        // var xhr = new XMLHttpRequest();
+        // xhr.open('POST', 'http://127.0.0.1:4000/', true);
+        // xhr.setRequestHeader('Content-Type', 'text/plain')
+        // xhr.send(blob);
+        let formData  = new FormData();
+        formData.append('avatar', blob)
+        formData.append('filename', filename)
+        return axios.post('http://127.0.0.1:4000/chunk', formData);
+    }
+
+    document.getElementById('f').addEventListener('change', async function (e) {
+        var blob = this.files[0];
+        let oldName = blob.name
+        console.log(blob)
+        let filename = SparkMD5.hash(oldName);
+        let ext = blob.type.split('/')[1];
+        const CHUNK_SIZE = 102400 * 2; // 100kb
+        const SIZE = blob.size;
+        var start = 0;
+        var index = 0;
+        var end = CHUNK_SIZE;
+        // upload(blob.slice(start, end),'1.png');
+        let promiseAll = []
+        while (start < SIZE) {
+            let chunk = blob.slice(start, end)
+            let pro = upload(chunk, filename + '==' + index);
+            promiseAll.push( pro );
+            start = end;
+            end = start + CHUNK_SIZE;
+            index += 1;
+        }
+
+        // 一起并行分块传输
+        await Promise.all(promiseAll)
+        // 合并块
+        let result = await axios.post('http://127.0.0.1:4000/merge', {filename,ext,oldName});
+        alert( result.data.message )
+    }, false);
+</script>
+</html>

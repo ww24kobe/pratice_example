@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a id="h">点此进行下载</a>
+</body>
+<script>
+    var blob = new Blob(["Hello World"]);
+    var url = window.URL.createObjectURL(blob);
+    var a = document.getElementById("h");
+    a.download = "helloworld.txt";
+    a.href = url;
+</script>
+</html>

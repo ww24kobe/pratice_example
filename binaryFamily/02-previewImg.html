@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id='f' />
+    <img id='img' style="width: 200px;" />
+</body>
+<script>
+    document.getElementById('f').addEventListener('change', function (e) {
+        var file = this.files[0];
+        const url = window.URL.createObjectURL(file);
+        const img = document.getElementById('img');
+        img.src = url;
+       
+        img.onload = function () {
+            // 释放一个之前通过调用 URL.createObjectURL创建的 URL 对象
+            window.URL.revokeObjectURL(url);
+            console.log('onload')
+             console.log(img)
+        }
+    }, false);
+</script>
+</html>
