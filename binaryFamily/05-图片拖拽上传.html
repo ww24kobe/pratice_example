@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>drag、drop</title>
+    <style>
+        .droptarget {
+            width: 100px;
+            height: 35px;
+            margin: 15px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>在两个矩形之间来回拖动p元素、或把文件拖入其中</p>
+
+    <div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <p ondragstart="dragStart(event)" ondragend="dragEnd(event)" draggable="true" id="dragtarget">拖动我！</p>
+    </div>
+
+    <div class="droptarget" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+    <p id="demo"></p>
+    <div>
+        <h3>图片预览区</h3>
+        <div id="imgWrap"></div>
+    </div>
+
+    <script>
+        let imgContainer = document.getElementById('imgWrap');
+        function dragStart(event) {
+            event.dataTransfer.setData("Text", event.target.id);
+            event.dataTransfer.setData("a", 1);
+            document.getElementById("demo").innerHTML = "开始拖动p元素";
+        }
+
+        function dragEnd(event) {
+            console.log('dragEnd');
+            console.log(event.dataTransfer);
+            document.getElementById("demo").innerHTML = "完成拖动p元素";
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drop(event) {
+            console.log('drop');
+            event.preventDefault();
+            var data = event.dataTransfer.getData("Text");
+            var a = event.dataTransfer.getData("a");
+            let files = event.dataTransfer.files;
+            if(files.length){
+                // 省略上传文件代码
+                // 文件
+                [...files].forEach(file => preview(file, imgContainer))
+            }else{
+                // dom元素
+                event.target.appendChild(document.getElementById(data));
+            }
+
+        }
+        
+        function preview(file, imgContainer){
+            if(!file.type.includes('image')){
+                alert(`${file.name}不是图片类型`);
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                let img = document.createElement("img");
+                img.src = e.target.result;
+                imgContainer.append(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+
+</body>
+
+</html>
