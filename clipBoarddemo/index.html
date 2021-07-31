@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <h2 id="title">我是复制的内容</h2>
-    地址： <input type="text" id="url">
+    <h2 id="title">我是待复制的内容</h2>
+    地址： <input type="text" id="url" value="http://baidu.com">
     <button id="copy">copy</button>
     <button id="copy2">复制h1</button>
 </body>
@@ -21,6 +21,7 @@
         urlEle.select(); // 选中文本
         document.execCommand('copy')
         urlEle.blur();
+        layer.msg('复制成功')
         // document.execCommand('cut')
     }
 
@@ -40,7 +41,9 @@
     document.getElementById("copy2").onclick = function () {
         let title = document.getElementById("title").innerHTML;
         copy(title)
+        layer.msg('复制成功')
     }
 </script>
-
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/layer/3.5.1/layer.js"></script>
 </html>

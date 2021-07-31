@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>示例1</h1>
+    <button class="btn" data-clipboard-text="你好">Copy</button>
+    <button class="btn" data-clipboard-text="杜兰特">Copy</button>
+    <button class="btn" data-clipboard-text="死神">Copy</button>
+
+    <h1>示例2</h1>
+    <button class="example">Copy</button>
+    <div class="star">科比-布莱恩特</div>
+
+    <h1>示例3</h1>
+    <button class="example2">Copy</button>
+
+    <h2>示例4</h2>
+    <input id="example3" type="text" value="hello" />
+    <button 
+        class="btn" 
+        data-clipboard-action="copy" 
+        data-clipboard-target="#example3"
+    >
+        Copy
+    </button>
+    <button class="btn" 
+    data-clipboard-action="cut" 
+    data-clipboard-target="#example3">
+        cut
+    </button>
+
+    
+    <h2>示例5</h2>
+    <button id="btn">
+        Copy
+    </button>
+</body>
+
+<script>
+    
+    window.onload = () => {
+        init();
+    }
+    function init() {
+        var clipboard1 = new ClipboardJS('.btn');
+        clipboard1.on('success', function (e) {
+            console.log(e);
+        });
+        clipboard1.on('error', function (e) {
+            console.log(e);
+        });
+
+        var clipboard2 = new ClipboardJS('.example', {
+            target: function () {
+                return document.querySelector('.star');
+            },
+        });
+
+        clipboard2.on('success', function (e) {
+            console.log(e);
+        });
+
+        clipboard2.on('error', function (e) {
+            console.log(e);
+        });
+
+
+        var clipboard3 = new ClipboardJS('.example2', {
+            text: function () {
+                return 'to be or not to be';
+            },
+        });
+
+        clipboard3.on('success', function (e) {
+            console.log(e);
+        });
+
+        clipboard3.on('error', function (e) {
+            console.log(e);
+        });
+
+        var clipboard4 = new ClipboardJS('.example3');
+        var clipboard5 = new ClipboardJS('.example4');
+
+        var btn = document.querySelector('#btn');
+
+        btn.addEventListener('click', function(){
+            console.log([ClipboardJS])
+            const textCopied = ClipboardJS.copy('123');
+            console.log('copied!', textCopied);
+        })
+    }
+
+
+</script>
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.8/clipboard.js"></script> -->
+<script src="./clipboard.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/layer/3.5.1/layer.js"></script>
+
+</html>
