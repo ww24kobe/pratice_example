@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./toastui-editor.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="editor"></div>
+</body>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<script>
+    const editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            height: '500px',
+            initialValue: `## Features
+
+* CommonMark + GFM Specifications
+    * Live Preview
+    * Scroll Sync
+    * Auto Indent
+    * Syntax Highlight
+        1. Markdown
+        2. Preview
+
+## Support Wrappers`,
+            initialEditType: 'wysiwyg'
+        });
+</script>
+</html>
