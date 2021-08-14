@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>call实现</h1>
+</body>
+<script>
+    "use strict";
+    Function.prototype.call1 = function (context) {
+        let callback = this;
+        let args = [...arguments];
+        let params = args.slice(1)
+        let ctx = arguments[0] || window;
+        // 记住apply
+        return callback.apply(ctx, params)
+    }
+
+    Function.prototype.call2 = function (context) {
+        context = context || window;
+        context.fn = this;
+        var args = [];
+        for(var i = 1, len = arguments.length; i < len; i++){
+            args.push('arguments[' + i + ']');
+        }
+        // 不借助apply,使用eval执行字符串代码
+        var result = eval('context.fn(' + args + ')');
+        delete context.fn; // 防止全局添加额外属性，删除
+        return result;
+    }
+
+    let obj = { name: "kobi" };
+
+    function foo(message) {
+        return "my name is " + this.name + '-:' + message
+    }
+
+    console.log(foo.call(obj,'你好'))
+    console.log(foo.call1(obj, '你好'))
+    console.log(foo.call2(obj, '你好'))
+</script>
+
+</html>

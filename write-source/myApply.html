@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>apply实现</h1>
+</body>
+<script>
+    "use strict";
+    Function.prototype.apply1 = function () {
+        if (typeof this !== 'function') {
+            throw new Error('必须是函数调用')
+        }
+        let callback = this;
+        console.log(arguments);
+        
+        let args = [...arguments];
+        let params = args.slice(1)
+        let ctx = arguments[0] || window;
+        if (args.length) {
+            return callback.call(ctx, ...params[0])
+        } else {
+            return callback.call(ctx)
+        }
+
+    }
+
+
+    let obj = { name: "kobi" };
+
+    function foo(message,age) {
+        return "my name is " + this.name + '-:' + message + age
+    }
+
+
+
+
+    console.log(foo.apply1(obj, ['你好',24]))
+</script>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>bind实现</h1>
+</body>
+<script>
+    "use strict";
+    Function.prototype.bind1 = function () {
+        if (typeof this !== 'function') {
+            throw new Error('必须是函数调用')
+        }
+        let callback = this;
+        let args = [...arguments];
+        let params = args.slice(1)
+        let ctx = arguments[0] || window;
+        if (args.length) {
+            return function () {
+                return callback.call(ctx, ...params);
+            }
+        } else {
+            return function () {
+                return callback.call(ctx);
+            }
+        }
+
+    }
+
+    Function.prototype.bind2 = function (context) {
+
+        if (typeof this !== 'function') {
+            throw new Error('必须是函数调用')
+        }
+
+        var self = this;
+        var args = Array.prototype.slice.call(arguments, 1);
+
+        var bindCallback = function () {
+            // 接受执行时额外的参数bind()(1,2)
+            var bindArgs = Array.prototype.slice.call(arguments);
+            return self.apply(context, [...args, ...bindArgs]);
+        }
+
+        // 定义空函数，实现中转继承，目的是防止修改原型对象中的属性会影响原函数原型属性
+        var emptyFunc = function () { };
+
+        // 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承绑定函数中原型的值
+        emptyFunc.prototype = this.prototype;
+        bindCallback.prototype = new emptyFunc();
+
+        // 上两行 等价于 
+        // bindCallback.prototype = Object.create(this.prototype);
+
+        return bindCallback;
+    }
+
+    let obj = { name: "kobi" };
+
+    function foo(message, age) {
+        return "my name is " + this.name + '-:' + message + age
+    }
+
+    console.log(foo.bind1(obj, '你好', 24)())
+    console.log(foo.bind2(obj, '你好', 24)())
+
+
+
+    // Object.create(null); // 创建不含原型的对象
+
+    /*
+        emptyFunc.prototype = this.prototype;
+        bindCallback.prototype = new emptyFunc();
+        等价于 bindCallback.prototype = Object.create(this.prototype);
+        
+        Object.create 的模拟实现就是：
+        Object.create = function( o ) {
+            function f(){}
+            f.prototype = o;
+        }
+        
+    */
+</script>
+
+</html>
