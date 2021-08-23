@@ -34,11 +34,9 @@
     }
 
     Function.prototype.bind2 = function (context) {
-
         if (typeof this !== 'function') {
             throw new Error('必须是函数调用')
         }
-
         var self = this;
         var args = Array.prototype.slice.call(arguments, 1);
 
@@ -47,37 +45,46 @@
             var bindArgs = Array.prototype.slice.call(arguments);
             return self.apply(context, [...args, ...bindArgs]);
         }
-
         // 定义空函数，实现中转继承，目的是防止修改原型对象中的属性会影响原函数原型属性
-        var emptyFunc = function () { };
-
+        var emptyFunc = function () {};
         // 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承绑定函数中原型的值
         emptyFunc.prototype = this.prototype;
         bindCallback.prototype = new emptyFunc();
 
-        // 上两行 等价于 
+        // 上面三行 等价于 
         // bindCallback.prototype = Object.create(this.prototype);
-
+        // Object.create 的模拟实现就是：
+        // Object.create = function (o) {
+        //     function f() { }
+        //     f.prototype = o;
+        // }
         return bindCallback;
     }
 
-    let obj = { name: "kobi" };
+    let obj = {
+        name: "kobi"
+    };
 
     function foo(message, age) {
         return "my name is " + this.name + '-:' + message + age
     }
 
     console.log(foo.bind1(obj, '你好', 24)())
-    console.log(foo.bind2(obj, '你好', 24)()) 
+    console.log(foo.bind2(obj, '你好', 24)())
 
 
 
     // Object.create(null); // 创建不含原型的对象
 
     /*
+        // 定义空函数，实现中转继承，目的是防止修改原型对象中的属性会影响原函数原型属性
+        var emptyFunc = function() {}
+        // 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承绑定函数中原型的值
         emptyFunc.prototype = this.prototype;
         bindCallback.prototype = new emptyFunc();
-        等价于 bindCallback.prototype = Object.create(this.prototype);
+        
+        等价于 
+        bindCallback.prototype = Object.create(this.prototype);
         
         Object.create 的模拟实现就是：
         Object.create = function( o ) {
