@@ -1,0 +1,49 @@
+<script>
+    // try {
+    //     (() => {
+    //         throw new Error('err1')
+    //     })()
+    // } catch (e) {
+    //     console.log(e); // caught
+    // }
+
+    // -----------------
+
+    // (async ()=>{
+    //     throw new Error('err2')
+    // })().catch(e=>{
+    //     console.log(e); // caught
+    // })
+
+    //-----------------
+    // try{
+    //     [1, 2, 3].forEach( item => {
+    //         console.log(item);
+    //         throw new Error('err3')
+    //     })
+    // }catch(e){
+    //     console.log(e); // caught
+    // }
+
+    //-----------------
+
+    // try {
+    //     [1, 2, 3].forEach(async (item) => {
+    //         throw new Error('err3')
+    //     })
+    // } catch (e) {
+    //     console.log(e); // uncaught
+    // }
+
+
+    // -----------------------
+    (async function () {
+        try {
+            await Promise.all([1, 2, 3].map(async () => {
+                throw new Error('err4')
+            }));
+        } catch (e) {
+            console.log(e); // uncaught
+        }
+    })()
+</script>
