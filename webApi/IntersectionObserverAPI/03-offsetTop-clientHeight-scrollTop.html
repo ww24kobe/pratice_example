@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <p>111111111111111111</p>
     <p>111111111111111111</p>
@@ -30,49 +28,51 @@
     <p>2222222222222222</p>
     <p>2222222222222222</p>
     <p>2222222222222222</p>
-    <img width="200px" data-src="https://img0.baidu.com/it/u=593652383,3007722262&fm=26&fmt=auto&gp=0.jpg" alt="">
-    <br />
+    <img width="200px" data-src="https://img0.baidu.com/it/u=593652383,3007722262&fm=26&fmt=auto&gp=0.jpg" alt="">  <br />
 
-    <img width="200px" data-src="https://img1.baidu.com/it/u=2247241615,3725296843&fm=26&fmt=auto&gp=0.jpg" alt="">
+    <img width="200px" data-src="https://img1.baidu.com/it/u=2247241615,3725296843&fm=26&fmt=auto&gp=0.jpg" alt=""> <br /> 
+    <h3>3333333333333333333</h3>
+    <h3>3333333333333333333</h3>
+    <h3>3333333333333333333</h3>
+    <h3>3333333333333333333</h3>
+    <h3>3333333333333333333</h3>
+    <h3>3333333333333333333</h3>
+    <h3>3333333333333333333</h3>
+    <h3>3333333333333333333</h3>
+    <h3>3333333333333333333</h3>
+    <img id="imgabc" width="200px" data-src="https://img0.baidu.com/it/u=2658555271,1114326008&fm=26&fmt=auto&gp=0.jpg" alt="">
     <br />
-    <h3>3333333333333333333</h3>
-    <h3>3333333333333333333</h3>
-    <h3>3333333333333333333</h3>
-    <h3>3333333333333333333</h3>
-    <h3>3333333333333333333</h3>
-    <h3>3333333333333333333</h3>
-    <h3>3333333333333333333</h3>
-    <h3>3333333333333333333</h3>
-    <h3>3333333333333333333</h3>
-    <img id="imgabc" width="200px" data-src="https://img0.baidu.com/it/u=2658555271,1114326008&fm=26&fmt=auto&gp=0.jpg"
-        alt="">
-    <br />
-
+    
     <h3>44444444444</h3>
     <h3>44444444444</h3>
     <h3>44444444444</h3>
     <h3>44444444444</h3>
     <h3>44444444444</h3>
-
 </body>
 <script>
+  
     let imgs = document.querySelectorAll('img');
-    let windonHeight = window.innerHeight;
-    console.log(windonHeight);
-
-    window.onscroll = function () {
+    
+    function scrollHandle(imgs){
+        let pageScrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+        // 或 window.innerHeight
+        let clientHeight = document.documentElement.clientHeight;
         imgs.forEach(img => {
-            if (img.getAttribute('isDone')) {
-                return;
-            }
-            let top = img.getBoundingClientRect().top;
-            if (top > 0 && top < windonHeight) {
-                console.log('jiazai ');
-                img.src = img.getAttribute('data-src');
-                img.setAttribute('isDone', true)
+            let offsetTop = img.offsetTop;
+            let done = img.getAttribute('loaded');
+            // 提前50像素预加载
+            if(offsetTop - 50 <  pageScrollTop + clientHeight){
+                !done && (img.src = img.getAttribute('data-src')) && img.setAttribute('loaded', 'done')
             }
         })
     }
-</script>
 
+    window.onscroll = function(event){
+        scrollHandle(imgs)
+    };
+
+    // 初始化一次 immediate
+    scrollHandle(imgs)
+   
+</script>
 </html>
