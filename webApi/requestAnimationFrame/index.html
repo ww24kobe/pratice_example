@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 0px;
+            height: 20px;
+            line-height: 20px;
+            background-color: #23acad;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 动画进度条 -->
+    <div id="box" class="box">
+        0%
+    </div>
+    <div id="random"></div>
+    <button id="btn">run</button>
+</body>
+<script>
+    /* 通过这个requestAnimationFrame的api,可以告诉浏览器某个JavaScript代码要执行动画，
+     浏览器收到通知后，则会运行这些代码的时候进行优化，实现流畅的效果，而不再需要开发人员烦心刷新频率的问题了
+     */
+    let timer;
+    let btn = document.getElementById('btn');
+    let box = document.getElementById('box')
+    let random = document.getElementById('random')
+    btn.onclick = function () {
+        box.style.width = '0';
+        cancelAnimationFrame(timer);
+        timer = requestAnimationFrame(function fn() {
+            if (parseInt(box.style.width) < 600) {
+                box.style.width = parseInt(box.style.width) + 6 + 'px'
+                box.innerHTML = parseInt(box.style.width) / 6 + '%'
+                timer = requestAnimationFrame(fn);
+            } else {
+                cancelAnimationFrame(timer)
+            }
+        })
+
+        
+    }
+</script>
+
+</html>
