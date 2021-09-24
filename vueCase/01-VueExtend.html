@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .toast {
+            position: fixed;
+            z-index: 999;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            padding: 5px 10px;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            width: 88px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <button @click="clickHandle">button</button>
+    </div>
+
+
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            message: "hello Vue"
+        },
+        methods: {
+            clickHandle() {
+                this.$toast('删除成功',1000)
+            }
+        }
+    })
+
+    const toastConstructor = Vue.extend({
+        template: `
+            <div class="toast" v-if="isShow">
+                {{ text }}  
+            </div>
+        `,
+        data: function () {
+            return {
+                text: 'message'
+            }
+        }
+
+    })
+
+    function Toast(text = 'message', duration = 2000) {
+        // 默认挂载到body内部后面
+        const vm = new toastConstructor({
+            el: document.createElement('div'),
+            data: {
+                text,
+                email: 'qq.com',
+                isShow: true
+            },
+            created() {
+                console.log('toast created');
+            },
+            mounted() {
+                console.log('toast mounted');
+            }
+
+        });
+        document.body.appendChild(vm.$el)
+        setTimeout(() => {
+            vm.isShow = false
+        }, duration);
+    }
+
+    function ToastInstall() {
+        Vue.prototype.$toast = Toast
+    }
+
+    Vue.use(ToastInstall)
+</script>
+
+</html>
