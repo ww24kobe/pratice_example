@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 声明式 -->
+        <h1>{{ message }}</h1>
+    </div>
+
+
+</body>
+<!-- 独立构建版本 -->
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
+<script>
+    // 关闭提示
+    Vue.config.productionTip = false;
+    new Vue({
+        el: "#app",
+        data: {
+            message: "hello Vue"
+        },
+        template:"<h2>hello react</h2>",
+        created() {
+            console.log('created')
+        },
+        mounted() {
+            console.log('mounted')
+        },
+        render(createElement) {
+            console.log('render')
+            // console.log(this); // vue实例
+            // 编程式
+            return createElement('h1', {
+                class: 'abc',
+                attrs: {
+                    id: 18,
+                    sid: this.message
+                },
+                style: {
+                    color: 'red'
+                }
+            }, 'hello world')
+        }
+    })
+
+    // 渲染过程
+
+    //     1】独立构建
+
+    //     包含模板编译器，HTML 字符串 =》 render 函数 =》 Vnode =》  真实 DOM 节点
+
+    //     2】运行时构建
+
+    //     不包含模板编译器，render 函数 =》 Vnode =》真实 DM 节点
+
+    // 优先级： render(运行时构建) > template > el
+
+
+</script>
+
+</html>
