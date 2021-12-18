@@ -5,10 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* 打印预览时有效 */
+        @media print { 
+            h1 {
+                width: 200px;
+                height: 200px;
+                border: 1px solid #ccc;
+            }
+        }
+    </style>
 </head>
 <body>
      <img id="logo" src="https://www.baidu.com/img/flexible/logo/pc/result.png" alt="">
-    <h1 style="color:pink;" id="h1">好好好h</h1>
+    <h1 style="background-color:pink;" id="h1">好好好h</h1>
     <button id="btn" style="color:red">打印电子面单</button>
 </body>
 <script>
@@ -17,7 +27,7 @@
     let logoEle = document.getElementById("logo");
     window.onbeforeprint = function(){
         logoEle.parentNode.removeChild(logoEle)
-        h1Ele.style.color = "green"
+        // h1Ele.style.color = "green"
         console.log('onbeforeprint')
     }
 
