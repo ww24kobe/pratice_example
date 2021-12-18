@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-   "scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -38,6 +38,7 @@
     "multiparty": "^4.2.2",
     "ora": "^5.4.1",
     "prompts": "^2.4.1",
+    "pubsub-js": "^1.9.4",
     "qrcode": "^1.4.4",
     "recast": "^0.20.5",
     "yargs": "^17.1.1"

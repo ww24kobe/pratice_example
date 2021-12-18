@@ -33,26 +33,46 @@
 
     }
 
-    Function.prototype.bind2 = function (context) {
+    Function.prototype.bind2 = function (context = globalThis) {
         if (typeof this !== 'function') {
             throw new Error('必须是函数调用')
         }
         var self = this;
         var args = Array.prototype.slice.call(arguments, 1);
+        // const otherArg = [...arguments].slice(1);
 
         var bindCallback = function () {
             // 接受执行时额外的参数bind()(1,2)
             var bindArgs = Array.prototype.slice.call(arguments);
+
+            // 如果是通过 new 调用的，绑定 this 为实例对象
+            // if (this instanceof result) {
+            //     fn.apply(this, otherArg.concat(resultArg));
+            // } else { // 否则普通函数形式绑定 context
+            //     fn.apply(context, otherArg.concat(resultArg));
+            // }
+
+           
             return self.apply(context, [...args, ...bindArgs]);
         }
+
+        // 绑定原型链
+        // result.prototype = Object.create(fn.prototype);
+
         // 定义空函数，实现中转继承，目的是防止修改原型对象中的属性会影响原函数原型属性
         var emptyFunc = function () {};
         // 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承绑定函数中原型的值
         emptyFunc.prototype = this.prototype;
         bindCallback.prototype = new emptyFunc();
 
+        // 绑定原型链
+        // result.prototype = Object.create(fn.prototype);
+
         // 上面三行 等价于 
         // bindCallback.prototype = Object.create(this.prototype);
+
+        
+
         // Object.create 的模拟实现就是：
         // Object.create = function (o) {
         //     function f() { }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <img id="logo" src="https://www.baidu.com/img/flexible/logo/pc/result.png" alt="">
+    <h1 style="color:pink;" id="h1">好好好h</h1>
+    <button id="btn" style="color:red">打印电子面单</button>
+</body>
+<script>
+    let btnEle = document.getElementById("btn");
+    let h1Ele = document.getElementById("h1");
+    let logoEle = document.getElementById("logo");
+    window.onbeforeprint = function(){
+        logoEle.parentNode.removeChild(logoEle)
+        h1Ele.style.color = "green"
+        console.log('onbeforeprint')
+    }
+
+    btnEle.onclick = function(){
+        window.print();
+    }
+     window.onafterprint = function () {
+            console.log('onafterprint')
+        }
+</script>
+</html>
